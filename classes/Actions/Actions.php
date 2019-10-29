@@ -1,36 +1,61 @@
 <?php
-class Actions {
-  private static $ACTIONS = ['Откликнуться', 'Отказаться', 'Отменить', 'Выполнено'];
-  private static $STATUSES = ['Новое', 'Выполнено', 'Провалено', 'Отменено', 'В работе'];
-  private static $ROLES = ['customer', 'perfomer'];
 
-  private static $actionToStatus = [
-    'Отменить' => 'Отменено',
-    'Откликнуться' => 'В работе',
-    'Выполнено' => 'Выполнено',
-    'Отказаться' => 'Провалено'
-  ];
+/**
+ * Фаил класса Actions.
+ *
+ * PHP version 7.3
+ *
+ * @category  Class
+ * @package   TaskForce
+ * @author    Deepsick <email@gmail.com>
+ * @copyright 2019-2020 The PHP Group
+ * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version   GIT: 1.0.1
+ * @link      http://pear.php.net/package/PackageNam
+ */
 
-  public function __construct(string $performerId, string $customerId, string $dueDate, string $activeStatus)
-  {
-    $this->performerId = $performerId;
-    $this->customerId = $customerId;
-    $this->dueDate = $dueDate;
-    $this->activeStatus = $activeStatus;
-  }
+/**
+ * Класс, работающий с действиями.
+ * 
+ * @category  Class
+ * @package   TaskForce
+ * @author    Deepsick <email@gmail.com>
+ * @copyright 2019-2020 The PHP Group
+ * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version   Release: 1.0.1
+ * @link      http://pear.php.net/package/PackageName
+ */
+class Actions
+{
+    public static $ACTIONS = ['Откликнуться', 'Отказаться', 'Отменить', 'Выполнено'];
 
-  public function getNewStatus(string $action):string
-  {
-    return self::$actionToStatus[$action];
-  }
+    /**
+     * Конструктор класса.
+     *
+     * @param string $contractorId Id исполнителя.
+     * @param string $customerId   Id заказчика.
+     * @param string $deadlineAt   Срок завершения.
+     *
+     * @return void
+     */
+    public function __construct(
+        string $contractorId,
+        string $customerId,
+        int $deadlineAt
+    ) {
+        $this->contractorId = $contractorId;
+        $this->customerId = $customerId;
+        $this->deadlineAt = $deadlineAt;
+        $this->activeStatus = 'Новое';
+    }
 
-  public function getStatuses():array
-  {
-    return self::$STATUSES;
-  }
-
-  public function getActions():array
-  {
-    return self::$ACTIONS;
-  }
+    /**
+     * Возвращает все доступные действия.
+     *
+     * @return array
+     */
+    public function getActions(): array
+    {
+        return self::$ACTIONS;
+    }
 }
