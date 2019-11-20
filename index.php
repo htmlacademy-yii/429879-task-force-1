@@ -1,9 +1,8 @@
 <?php
-use TaskForce\logic\Statuses\TaskStatusCompleted;
-
+use TaskForce\logic\Task\Task;
 
 require_once 'vendor/autoload.php';
 
-$status = new TaskStatusCompleted();
+$task = new Task('contractorId', 'customerId', 123456);
 
-print($status->getId());
+print($task->getNewStatus('TASK_ACTION_CANCEL'));
