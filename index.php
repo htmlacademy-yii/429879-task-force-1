@@ -1,7 +1,5 @@
 <?php
-use TaskForce\logic\Task\Task;
-
-require_once 'vendor/autoload.php';
+require_once 'src/Task.php';
 
 $task = new Task('contractorId', 'customerId', 123456);
 
