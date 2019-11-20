@@ -1,10 +1,7 @@
 <?php
-namespace TaskForce\tests;
-
-require_once './vendor/autoload.php';
+require_once 'Task.php';
 
 use PHPUnit\Framework\TestCase;
-use TaskForce\logic\Task\Task;
 
 class TaskTest extends TestCase
 {

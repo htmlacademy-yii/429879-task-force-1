@@ -1,8 +1,5 @@
 <?php
-
-namespace TaskForce\logic\Task;
-
-class Task implements TaskInterface
+class Task
 {
     /* ДЕЙСТВИЯ */
     protected static $taskActionApplyId = 'TASK_ACTION_APPLY';
