@@ -3,5 +3,5 @@ namespace TaskForce\logic\Task;
 
 interface TaskInterface
 {
-  // TODO: добавить что-нибудь
+  // public function getNewStatus($actionId): string; // Что-то не так с интерфейсом
 }
