@@ -1,5 +1,5 @@
 <?php
-require_once 'Task.php';
+use TaskForce\logic\Task\Task;
 
 use PHPUnit\Framework\TestCase;
 
