@@ -12,8 +12,8 @@ class TaskTest extends TestCase
      */
     public function testCancelAction():void
     {
-        $task = new Task('contractorId', 'customerId', 1234567);
-        $this->assertTrue($task->getNewStatus('TASK_ACTION_CANCEL') === 'TASK_STATUS_CANCELED');
+        $task = new Task('contractorId', 'customerId', 1234567, Task::STATUS_NEW);
+        $this->assertTrue($task->getNewStatus(Task::ACTION_CANCEL) === Task::STATUS_CANCELED);
     }
 
     /**
@@ -23,8 +23,8 @@ class TaskTest extends TestCase
      */
     public function testApplyAction():void
     {
-        $task = new Task('contractorId', 'customerId', 1234567);
-        $this->assertTrue($task->getNewStatus('TASK_ACTION_APPLY') === 'TASK_STATUS_IN_PROGRESS');
+        $task = new Task('contractorId', 'customerId', 1234567, Task::STATUS_NEW);
+        $this->assertTrue($task->getNewStatus(Task::ACTION_APPLY) === Task::STATUS_IN_PROGRESS);
     }
 
     /**
@@ -34,8 +34,8 @@ class TaskTest extends TestCase
      */
     public function testCompleteAction():void
     {
-        $task = new Task('contractorId', 'customerId', 1234567, 'TASK_STATUS_IN_PROGRESS');
-        $this->assertTrue($task->getNewStatus('TASK_ACTION_COMPLETE') === 'TASK_STATUS_COMPLETED');
+        $task = new Task('contractorId', 'customerId', 1234567, Task::STATUS_IN_PROGRESS);
+        $this->assertTrue($task->getNewStatus(Task::ACTION_COMPLETE) === Task::STATUS_COMPLETED);
     }
 
     /**
@@ -45,8 +45,8 @@ class TaskTest extends TestCase
      */
     public function testRefuseAction():void
     {
-        $task = new Task('contractorId', 'customerId', 1234567, 'TASK_STATUS_IN_PROGRESS');
-        $this->assertTrue($task->getNewStatus('TASK_ACTION_REFUSE') === 'TASK_STATUS_FAILED');
+        $task = new Task('contractorId', 'customerId', 1234567, Task::STATUS_IN_PROGRESS);
+        $this->assertTrue($task->getNewStatus(Task::ACTION_REFUSE) === Task::STATUS_FAILED);
     }
 }
 

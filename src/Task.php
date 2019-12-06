@@ -2,49 +2,44 @@
 class Task
 {
     /* ДЕЙСТВИЯ */
-    protected static $taskActionApplyId = 'TASK_ACTION_APPLY';
-    protected static $taskActionApplyTitle = 'Откликнуться';
-
-    protected static $taskActionCancelId = 'TASK_ACTION_CANCEL';
-    protected static $taskActionCancelTitle = 'Отменить';
-
-    protected static $taskActionCompleteId = 'TASK_ACTION_COMPLETE';
-    protected static $taskActionCompleteTitle = 'Выполнено';
-
-    protected static $taskActionRefuseId = 'TASK_ACTION_REFUSE';
-    protected static $taskActionRefuseTitle = 'Отказаться';
+    const ACTION_APPLY = 'ACTION_APPLY';
+    const ACTION_CANCEL = 'ACTION_CANCEL';
+    const ACTION_COMPLETE = 'ACTION_COMPLETE';
+    const ACTION_REFUSE = 'ACTION_REFUSE';
 
     /* РОЛИ */
-    protected static $taskRoleContractorId = 'TASK_ROLE_CONTRACTOR';
-    protected static $taskRoleContractorTitle = 'Исполнитель';
-
-    protected static $taskRoleCustomerId = 'TASK_ROLE_CUSTOMER';
-    protected static $taskRoleCustomerTitle = 'Заказчик';
-
+    const ROLE_CONTRACTOR = 'ROLE_CONTRACTOR';
+    const ROLE_CUSTOMER = 'ROLE_CUSTOMER';
+    
     /* СТАТУСЫ */
-    protected static $taskStatusCompletedId = 'TASK_STATUS_COMPLETED';
-    protected static $taskStatusCompletedTitle = 'Выполнено';
+    const STATUS_COMPLETED = 'STATUS_COMPLETED';
+    const STATUS_FAILED = 'STATUS_FAILED';
+    const STATUS_IN_PROGRESS = 'STATUS_IN_PROGRESS';
+    const STATUS_CANCELED = 'STATUS_CANCELED';
+    const STATUS_NEW = 'STATUS_NEW';
 
-    protected static $taskStatusFailedId = 'TASK_STATUS_FAILED';
-    protected static $taskStatusFailedTitle = 'Провалено';
-
-    protected static $taskStatusInProgressId = 'TASK_STATUS_IN_PROGRESS';
-    protected static $taskStatusInProgressTitle = 'В работе';
-
-    protected static $taskStatusCanceledId = 'TASK_STATUS_CANCELED';
-    protected static $taskStatusCanceledTitle = 'Отменено';
-
-    protected static $taskStatusNewId = 'TASK_STATUS_NEW';
-    protected static $taskStatusNewTitle = 'Новое';
+    const TASK_NAMES = [
+        self::ACTION_APPLY => 'Откликнуться',
+        self::ACTION_CANCEL => 'Отменить',
+        self::ACTION_COMPLETE => 'Выполнено',
+        self::ACTION_REFUSE => 'Отказаться',
+        self::ROLE_CONTRACTOR => 'Исполнитель',
+        self::ROLE_CUSTOMER => 'Заказчик',
+        self::STATUS_COMPLETED => 'Выполнено',
+        self::STATUS_FAILED => 'Провалено',
+        self::STATUS_IN_PROGRESS => 'В работе',
+        self::STATUS_CANCELED => 'Отменено',
+        self::STATUS_NEW => 'Новое',
+    ];
 
     protected static $statusManager = [
-        'TASK_STATUS_NEW' => [
-            'TASK_ACTION_CANCEL' => 'TASK_STATUS_CANCELED', 
-            'TASK_ACTION_APPLY' => 'TASK_STATUS_IN_PROGRESS'
+        self::STATUS_NEW => [
+            self::ACTION_CANCEL => self::STATUS_CANCELED, 
+            self::ACTION_APPLY => self::STATUS_IN_PROGRESS
         ],
-        'TASK_STATUS_IN_PROGRESS' => [
-            'TASK_ACTION_COMPLETE' => 'TASK_STATUS_COMPLETED', 
-            'TASK_ACTION_REFUSE' => 'TASK_STATUS_FAILED'
+        self::STATUS_IN_PROGRESS => [
+            self::ACTION_COMPLETE => self::STATUS_COMPLETED, 
+            self::ACTION_REFUSE => self::STATUS_FAILED
         ]
     ];
 
@@ -61,7 +56,7 @@ class Task
         string $contractorId,
         string $customerId,
         int $deadlineAt,
-        string $activeStatusId = 'TASK_STATUS_NEW'
+        string $activeStatusId
     ) {
         $this->contractorId = $contractorId;
         $this->customerId = $customerId;
