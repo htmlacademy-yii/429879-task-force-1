@@ -1,4 +1,7 @@
 <?php
+namespace TaskForce\logic;
+
+
 class Task
 {
     /* ДЕЙСТВИЯ */

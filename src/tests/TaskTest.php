@@ -1,7 +1,9 @@
 <?php
-require_once 'Task.php';
+use TaskForce\logic\Task;
 
 use PHPUnit\Framework\TestCase;
+
+require_once __DIR__.'/../../vendor/autoload.php';
 
 class TaskTest extends TestCase
 {
