@@ -20,9 +20,9 @@ CREATE TABLE `users` (
   `tel` VARCHAR(64) DEFAULT NULL,
   `skype` VARCHAR(64) DEFAULT NULL,
   `contacts` VARCHAR(64) DEFAULT NULL,
-  `show_contacts` BIT DEFAULT 1,
-  `show_profile` BIT DEFAULT 1,
-  `is_customer` BIT DEFAULT 1,
+  `show_contacts` TINYINT(1) NOT NULL DEFAULT 1,
+  `show_profile` TINYINT(1) NOT NULL DEFAULT 1,
+  `is_customer` TINYINT(1) NOT NULL DEFAULT 1,
   `profile_views` INT DEFAULT 0,
   `failed_tasks_count` INT DEFAULT 0
 );
@@ -59,7 +59,8 @@ CREATE TABLE `tasks` (
   `budget` INT DEFAULT NULL,
   `date_expire` DATETIME NOT NULL,
   `date_create` DATETIME DEFAULT NOW(),
-  `coords` VARCHAR(64) DEFAULT NULL,
+  `lat` VARCHAR(64) NOT NULL,
+  `long` VARCHAR(64) NOT NULL,
   `city_id` INT DEFAULT NULL,
   `contractor_id` INT DEFAULT NULL,
   `customer_id` INT NOT NULL
@@ -73,7 +74,9 @@ CREATE TABLE `task_files` (
 
 CREATE TABLE `cities` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `name` VARCHAR(64) NOT NULL
+  `name` VARCHAR(64) NOT NULL,
+  `lat` VARCHAR(64) NOT NULL,
+  `long` VARCHAR(64) NOT NULL
 );
 
 /* отклики */
@@ -101,7 +104,7 @@ CREATE TABLE `messages` (
   `task_id` INT NOT NULL,
   `date_create` DATETIME DEFAULT NOW(),
   `user_id` INT NOT NULL,
-  `is_customer` BIT DEFAULT 0 /* пока не уверен, что это нужно */
+  `is_customer` TINYINT(1) NOT NULL DEFAULT 0
 );
 
 CREATE TABLE `notifications` (
