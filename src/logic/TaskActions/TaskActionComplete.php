@@ -3,8 +3,25 @@ namespace TaskForce\logic\TaskActions;
 
 class TaskActionComplete extends AbstractAction
 {
-    protected static $id = 'ACTION_COMPLETE';
-    protected static $title = 'Выполнено';
+    /**
+     * Вовзвращает id действия.
+     *
+     * @return string
+     */
+    public static function getId(): string
+    {
+      return 'ACTION_COMPLETE';
+    }
+
+    /**
+     * Возвращает название действия.
+     *
+     * @return string
+     */
+    public static function getTitle(): string
+    {
+      return 'Выполнено';
+    }
 
     /**
      * Проверяет права на исполнение действия.

@@ -5,30 +5,19 @@ use PHPUnit\Framework\Error\Error;
 
 abstract class AbstractAction
 {
-    /* @var string */
-    protected static $id;
-    /* @var string */
-    protected static $title;
-
     /**
      * Вовзвращает id действия.
      *
      * @return string
      */
-    public function getId(): string
-    {
-      return self::$id;
-    }
+    abstract public static function getId(): string;
 
     /**
      * Возвращает название действия.
      *
      * @return string
      */
-    public function getTitle(): string
-    {
-      return self::$title;
-    }
+    abstract public static function getTitle(): string;
     
     /**
      * Проверяет права на исполнение действия.
@@ -39,13 +28,9 @@ abstract class AbstractAction
      *
      * @return bool
      */
-    public static function isValidUser(
+    abstract public static function isValidUser(
         string $contractorId,
         string $customerId,
         string $userId
-    ): bool
-    {
-      throw new Exception('Should be implemented by children');
-      return false;
-    }
+    ): bool;
 }

@@ -3,8 +3,25 @@ namespace TaskForce\logic\TaskActions;
 
 class TaskActionRefuse extends AbstractAction
 {
-    protected static $id = 'ACTION_REFUSE';
-    protected static $title = 'Отказаться';
+    /**
+     * Вовзвращает id действия.
+     *
+     * @return string
+     */
+    public static function getId(): string
+    {
+      return 'ACTION_REFUSE';
+    }
+
+    /**
+     * Возвращает название действия.
+     *
+     * @return string
+     */
+    public static function getTitle(): string
+    {
+      return 'Отказаться';
+    }
 
     /**
      * Проверяет права на исполнение действия.

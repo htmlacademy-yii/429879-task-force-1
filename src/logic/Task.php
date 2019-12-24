@@ -86,8 +86,7 @@ class Task
         foreach ($actions as $action => $status)
         {
             $className = 'TaskForce\logic\TaskActions\\' . AvailableTasks::ACTION_ID_TO_CLASS[$action];
-            $actionClass = new $className();
-            $isAvailable = $actionClass->isValidUser($this->contractorId, $this->customerId, $userId); 
+            $isAvailable = $className::isValidUser($this->contractorId, $this->customerId, $userId); 
             if ($isAvailable)
             {
                 return $action;

@@ -3,8 +3,25 @@ namespace TaskForce\logic\TaskActions;
 
 class TaskActionApply extends AbstractAction
 {
-    protected static $id = 'ACTION_APPLY';
-    protected static $title = 'Откликнуться';
+    /**
+     * Вовзвращает id действия.
+     *
+     * @return string
+     */
+    public static function getId(): string
+    {
+      return 'ACTION_APPLY';
+    }
+
+    /**
+     * Возвращает название действия.
+     *
+     * @return string
+     */
+    public static function getTitle(): string
+    {
+      return 'Откликнуться';
+    }
 
     /**
      * Проверяет права на исполнение действия.

@@ -3,8 +3,25 @@ namespace TaskForce\logic\TaskActions;
 
 class TaskActionCancel extends AbstractAction
 {
-    protected static $id = 'ACTION_CANCEL';
-    protected static $title = 'Отменить';
+    /**
+     * Вовзвращает id действия.
+     *
+     * @return string
+     */
+    public static function getId(): string
+    {
+      return 'ACTION_CANCEL';
+    }
+
+    /**
+     * Возвращает название действия.
+     *
+     * @return string
+     */
+    public static function getTitle(): string
+    {
+      return 'Отменить';
+    }
 
     /**
      * Проверяет права на исполнение действия.
