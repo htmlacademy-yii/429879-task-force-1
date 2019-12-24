@@ -1,15 +1,13 @@
 <?php
 namespace TaskForce\logic;
 
-
+use TaskForce\logic\AvailableTasks;
+use TaskForce\logic\TaskActions\TaskActionApply;
+use TaskForce\logic\TaskActions\TaskActionCancel;
+use TaskForce\logic\TaskActions\TaskActionComplete;
+use TaskForce\logic\TaskActions\TaskActionRefuse;
 class Task
 {
-    /* ДЕЙСТВИЯ */
-    const ACTION_APPLY = 'ACTION_APPLY';
-    const ACTION_CANCEL = 'ACTION_CANCEL';
-    const ACTION_COMPLETE = 'ACTION_COMPLETE';
-    const ACTION_REFUSE = 'ACTION_REFUSE';
-
     /* РОЛИ */
     const ROLE_CONTRACTOR = 'ROLE_CONTRACTOR';
     const ROLE_CUSTOMER = 'ROLE_CUSTOMER';
@@ -22,10 +20,6 @@ class Task
     const STATUS_NEW = 'STATUS_NEW';
 
     const TASK_NAMES = [
-        self::ACTION_APPLY => 'Откликнуться',
-        self::ACTION_CANCEL => 'Отменить',
-        self::ACTION_COMPLETE => 'Выполнено',
-        self::ACTION_REFUSE => 'Отказаться',
         self::ROLE_CONTRACTOR => 'Исполнитель',
         self::ROLE_CUSTOMER => 'Заказчик',
         self::STATUS_COMPLETED => 'Выполнено',
@@ -37,12 +31,12 @@ class Task
 
     protected static $statusManager = [
         self::STATUS_NEW => [
-            self::ACTION_CANCEL => self::STATUS_CANCELED, 
-            self::ACTION_APPLY => self::STATUS_IN_PROGRESS
+            AvailableTasks::ACTION_CANCEL => self::STATUS_CANCELED, 
+            AvailableTasks::ACTION_APPLY => self::STATUS_IN_PROGRESS
         ],
         self::STATUS_IN_PROGRESS => [
-            self::ACTION_COMPLETE => self::STATUS_COMPLETED, 
-            self::ACTION_REFUSE => self::STATUS_FAILED
+            AvailableTasks::ACTION_COMPLETE => self::STATUS_COMPLETED, 
+            AvailableTasks::ACTION_REFUSE => self::STATUS_FAILED
         ]
     ];
 
@@ -74,8 +68,29 @@ class Task
      *
      * @return string Идентификатор нового статуса.
      */
-    public function getNewStatus($actionId)
+    public function getNewStatus(string $actionId)
     {
         return self::$statusManager[$this->activeStatusId][$actionId];
+    }
+
+    /**
+     * Возвращает доступное действие согласно статусу задания и роли пользователя.
+     *
+     * @param string $userId Идентификатор текущего пользователя.
+     *
+     * @return string Идентификатор действия.
+     */
+    public function getAvailableAction(string $userId)
+    {
+        $actions = self::$statusManager[$this->activeStatusId];
+        foreach ($actions as $action => $status)
+        {
+            $className = 'TaskForce\logic\TaskActions\\' . AvailableTasks::ACTION_ID_TO_CLASS[$action];
+            $isAvailable = $className::isValidUser($this->contractorId, $this->customerId, $userId); 
+            if ($isAvailable)
+            {
+                return $action;
+            }
+        }
     }
 }
