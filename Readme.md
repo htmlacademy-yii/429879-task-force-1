@@ -1,7 +1,7 @@
 # Личный проект «TaskForce»
 
 * Студент: [Артем Макаров](https://up.htmlacademy.ru/yii/1/user/429879).
-* Наставник: [Михаил Куприянов](https://up.htmlacademy.ru/yii/1/user/541075).
+* Наставник: `Неизвестно`.
 
 ---
 
