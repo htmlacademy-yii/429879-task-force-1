@@ -68,7 +68,7 @@ class Task
      *
      * @return string Идентификатор нового статуса.
      */
-    public function getNewStatus(string $actionId)
+    public function getNewStatus(string $actionId): string
     {
         return self::$statusManager[$this->activeStatusId][$actionId];
     }
@@ -80,7 +80,7 @@ class Task
      *
      * @return string Идентификатор действия.
      */
-    public function getAvailableAction(string $userId)
+    public function getAvailableAction(string $userId): string
     {
         $actions = self::$statusManager[$this->activeStatusId];
         foreach ($actions as $action => $status)
